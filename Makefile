@@ -2,11 +2,13 @@ UNIFI_SOURCE_DIR:=$(dir $(abspath $(lastword $(MAKEFILE_LIST))))
 
 include $(TOPDIR)/rules.mk
 
+PKG_NAME:=luci-theme-unifi
+PKG_VERSION:=$(shell python3 "$(UNIFI_SOURCE_DIR)tools/version.py")
+PKG_RELEASE:=1
+
 LUCI_TITLE:=Unifi theme with an OpenWrt-native dashboard
 LUCI_DEPENDS:=+luci-base +luci-theme-bootstrap +luci-mod-status +ucode-mod-uloop +iputils-arping
 LUCI_PKGARCH:=all
-PKG_VERSION:=$(shell python3 "$(UNIFI_SOURCE_DIR)tools/version.py")
-PKG_RELEASE:=1
 PKG_LICENSE:=Apache-2.0 CC0-1.0 OFL-1.1
 
 define Package/luci-theme-unifi/conffiles
@@ -53,4 +55,4 @@ endef
 
 include $(TOPDIR)/feeds/luci/luci.mk
 
-# Build within an OpenWrt/LuCI source tree or SDK.
+# call BuildPackage - OpenWrt buildroot signature
